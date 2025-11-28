@@ -1,0 +1,111 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int        @id @default(autoincrement())
+  name       String
+  email      String     @unique
+  password   String
+  role       String     // 'admin', 'producao', 'entrega'
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  deliveries Delivery[]
+
+  @@map("users")
+}
+
+model Product {
+  id          Int          @id @default(autoincrement())
+  name        String
+  description String?      @db.Text
+  price       Float
+  imageUrl    String?
+  category    String       @default("cocada") // 'cocada', 'outro'
+  flavor      String?      // Para cocadas: tradicional, doce_leite, maracuja, etc
+  active      Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  orderItems  OrderItem[]
+  productions Production[]
+
+  @@map("products")
+}
+
+model Order {
+  id            Int         @id @default(autoincrement())
+  customerName  String
+  customerPhone String
+  customerEmail String?
+  address       String      @db.Text
+  status        String      @default("pendente") // 'pendente', 'em_producao', 'pronto', 'entrega', 'entregue', 'cancelado'
+  totalPrice    Float
+  paymentMethod String?     // 'pix', 'dinheiro', 'cartao'
+  notes         String?     @db.Text
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  items         OrderItem[]
+  deliveries    Delivery[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  quantity  Int
+  unitPrice Float
+  productId Int
+  orderId   Int
+  product   Product @relation(fields: [productId], references: [id])
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("order_items")
+}
+
+model Ingredient {
+  id        Int      @id @default(autoincrement())
+  name      String
+  quantity  Float    // Quantidade disponível (ex: kg, litros)
+  unit      String   @default("kg") // 'kg', 'litros', 'unidades'
+  minStock  Float    @default(5) // Alerta de estoque baixo
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("ingredients")
+}
+
+model Production {
+  id          Int       @id @default(autoincrement())
+  productId   Int
+  status      String    @default("preparando") // 'preparando', 'no_fogo', 'resfriando', 'pronto'
+  yieldAmount Int       // Quantidade produzida (unidades)
+  batchCode   String?   // Código do lote
+  notes       String?   @db.Text
+  startedAt   DateTime  @default(now())
+  finishedAt  DateTime?
+  product     Product   @relation(fields: [productId], references: [id])
+
+  @@map("productions")
+}
+
+model Delivery {
+  id          Int      @id @default(autoincrement())
+  orderId     Int
+  deliveryMan Int
+  status      String   @default("pendente") // 'pendente', 'a_caminho', 'entregue', 'cancelado'
+  notes       String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  order       Order    @relation(fields: [orderId], references: [id])
+  user        User     @relation(fields: [deliveryMan], references: [id])
+
+  @@map("deliveries")
+}
