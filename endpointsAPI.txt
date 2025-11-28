@@ -1,0 +1,54 @@
+🔌 Endpoints da API
+Auth
+
+POST /auth/login
+
+POST /auth/register (admin)
+
+Produtos
+
+GET /products
+
+GET /products/:id
+
+POST /products (admin)
+
+PUT /products/:id
+
+DELETE /products/:id
+
+Pedidos
+
+GET /orders
+
+GET /orders/:id
+
+POST /orders
+
+PUT /orders/:id/status
+
+GET /orders/:id/track
+
+Produção
+
+GET /production
+
+POST /production
+
+PUT /production/:id/status
+
+Estoque
+
+GET /ingredients
+
+POST /ingredients
+
+PUT /ingredients/:id
+
+Entrega
+
+GET /deliveries
+
+POST /deliveries
+
+PUT /deliveries/:id/status

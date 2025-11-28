@@ -1,0 +1,48 @@
+📅 Roadmap Inicial
+Semana 1 — Backend
+
+Setup Node + Express
+
+Models Prisma
+
+CRUDs principais (produtos, pedidos)
+
+Auth + JWT
+
+Estrutura de rotas e serviços
+
+Semana 2 — Frontend
+
+Setup React + Tailwind
+
+Home
+
+Cardápio
+
+Produto
+
+Carrinho + Zustand
+
+Checkout + Integração API
+
+Semana 3 — Admin
+
+Login Admin
+
+Dashboard
+
+CRUD produtos
+
+Pedidos
+
+Produção
+
+Semana 4 — Extras
+
+Rastreamento
+
+Estoque
+
+Entregas
+
+Deploy

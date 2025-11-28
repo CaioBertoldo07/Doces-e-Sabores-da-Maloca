@@ -1,0 +1,42 @@
+🔄 Fluxos do Sistema
+1. Fluxo do Pedido
+
+Cliente adiciona produtos ao carrinho
+
+Realiza checkout (endereço + pagamento)
+
+Pedido é criado no backend
+
+Produção inicia o preparo
+
+Produção finaliza e entrega assume
+
+Cliente pode rastrear status
+
+Entrega marca como concluído
+
+2. Fluxo da Produção
+
+Painel exibe pedidos pendentes
+
+Operador inicia lote
+
+Marca cada etapa:
+
+preparando
+
+no fogo
+
+resfriando
+
+pronto
+
+Sistema registra rendimento
+
+3. Fluxo de Estoque
+
+Admin adiciona ingredientes
+
+Produção reduz estoque automaticamente
+
+Alertas quando ingrediente está baixo
