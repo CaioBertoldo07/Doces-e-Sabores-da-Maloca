@@ -70,6 +70,14 @@ hooks/
 
 ---
 
+### **Sabores das Cocadas**
+- Tradicional
+- Doce de Leite
+- Maracujá
+- Prestígio
+- Castanha
+- Cupuaçu
+
 ## 📚 Modelos do Banco (Prisma)
 
 ```prisma
